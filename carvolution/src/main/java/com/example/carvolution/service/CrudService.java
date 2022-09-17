@@ -36,7 +36,7 @@ public class CrudService {
     }
 
     public User updateAdress(Adress adress, int user_id){
-        User user = userRepository.findById(user_id).orElseThrow(() -> new EntityNotFoundException("Id not found"));
+        User user = userRepository.findById(user_id).orElseThrow(() -> new EntityNotFoundException("User with ID " + user_id+ " not found"));
         Adress checked = checkAdress(adress);
         user.setAdress(checked);
         return userRepository.save(user);
