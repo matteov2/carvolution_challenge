@@ -13,8 +13,7 @@ public class User {
     private String firstname;
     private String lastname;
 
-    @ManyToOne
-    //@JoinColumn(name = "adress_id",referencedColumnName = "adress_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Adress adress;
 
     public User(){}

@@ -9,10 +9,9 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.Optional;
 
 @Service
-public class CrudService {
+public class UserAdressService {
 
     @Autowired
     UserRepository userRepository;
@@ -24,22 +23,24 @@ public class CrudService {
         return userRepository.findAll();
     }
 
-    public Optional<User> getUser(int id){
-        return userRepository.findById(id);
+    public User getUser(int id){
+        return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User with ID " + id + " not found"));
     }
 
     public User saveUserAndAdress(User user){
         Adress adress = user.getAdress();
         Adress checked = checkAdress(adress);
         user.setAdress(checked);
-        return userRepository.save(user);
+        userRepository.save(user);
+        return userRepository.findById(user.getId()).orElseThrow(() -> new EntityNotFoundException("User with ID " + user.getId() + " not found"));
     }
 
-    public User updateAdress(Adress adress, int user_id){
+    public Adress updateAdress(Adress adress, int user_id){
         User user = userRepository.findById(user_id).orElseThrow(() -> new EntityNotFoundException("User with ID " + user_id+ " not found"));
         Adress checked = checkAdress(adress);
         user.setAdress(checked);
-        return userRepository.save(user);
+        userRepository.save(user);
+        return checked;
     }
 
     private Adress checkAdress(Adress adress){
