@@ -1,5 +1,7 @@
 package com.example.carvolution.model;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,13 +13,25 @@ public class Adress {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @NotNull
     private String street;
+
+    @NotNull
     private String postcode;
+
+    @NotNull
     private String city;
 
     public Adress(){}
 
     public Adress(String street, String postcode, String city) {
+        this.street = street;
+        this.postcode = postcode;
+        this.city = city;
+    }
+
+    public Adress(int id, String street, String postcode, String city) {
+        this.id = id;
         this.street = street;
         this.postcode = postcode;
         this.city = city;

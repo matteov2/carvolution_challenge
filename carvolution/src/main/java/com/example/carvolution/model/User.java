@@ -1,5 +1,7 @@
 package com.example.carvolution.model;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,15 +12,26 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @NotNull
     private String firstname;
+
+    @NotNull
     private String lastname;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
     private Adress adress;
 
     public User(){}
 
     public User(String firstname, String lastname, Adress adress) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.adress = adress;
+    }
+
+    public User(int id,String firstname, String lastname, Adress adress) {
+        this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.adress = adress;
