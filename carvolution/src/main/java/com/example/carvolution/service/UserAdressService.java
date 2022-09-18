@@ -1,5 +1,6 @@
 package com.example.carvolution.service;
 
+import com.example.carvolution.exception.NotFoundException;
 import com.example.carvolution.model.Adress;
 import com.example.carvolution.model.User;
 import com.example.carvolution.repository.AdressRepository;
@@ -24,7 +25,7 @@ public class UserAdressService {
     }
 
     public User getUser(int id){
-        return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User with ID " + id + " not found"));
+        return userRepository.findById(id).orElseThrow(() -> new NotFoundException("User with ID "+ id + " not found in db"));
     }
 
     public User saveUserAndAdress(User user){
@@ -32,11 +33,11 @@ public class UserAdressService {
         Adress checked = checkAdress(adress);
         user.setAdress(checked);
         userRepository.save(user);
-        return userRepository.findById(user.getId()).orElseThrow(() -> new EntityNotFoundException("User with ID " + user.getId() + " not found"));
+        return userRepository.findById(user.getId()).orElseThrow(() -> new NotFoundException("User with ID " + user.getId() + " not found"));
     }
 
     public Adress updateAdress(Adress adress, int user_id){
-        User user = userRepository.findById(user_id).orElseThrow(() -> new EntityNotFoundException("User with ID " + user_id+ " not found"));
+        User user = userRepository.findById(user_id).orElseThrow(() -> new NotFoundException("User with ID " + user_id+ " not found"));
         Adress checked = checkAdress(adress);
         user.setAdress(checked);
         userRepository.save(user);
@@ -48,7 +49,7 @@ public class UserAdressService {
         if (similar.size() == 0){
             return adressRepository.save(adress);
         } else {
-            return adressRepository.findById(similar.get(0).getId()).orElseThrow(() -> new EntityNotFoundException("Id not found"));
+            return adressRepository.findById(similar.get(0).getId()).orElseThrow(() -> new NotFoundException("Adress with ID" + similar.get(0).getId() +" not found"));
         }
     }
 }
