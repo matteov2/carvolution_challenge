@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class LoadDatabase {
-    private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
+public class DateBaseLoader {
+    private static final Logger log = LoggerFactory.getLogger(DateBaseLoader.class);
 
     @Bean
     CommandLineRunner initDatabase(AdressRepository adressRepository, UserRepository userRepository) {
@@ -20,7 +20,7 @@ public class LoadDatabase {
         return args -> {
             log.info("Preloading " + userRepository.save(new User("Max", "Muster", adressRepository.save(new Adress("Musterstrasse 29", "3000", "Bern")))));
             log.info("Preloading " + userRepository.save(new User("Hans", "Meier", adressRepository.save(new Adress("Musterstrasse 29", "8000", "Zürich")))));
-            log.info("Preloading " + userRepository.save(new User("Jan", "Müller", adressRepository.save(new Adress("Abcstrasse 6", "3086", "Belp" )))));
+            log.info("Preloading " + userRepository.save(new User("Jan", "Müller", adressRepository.save(new Adress("Abcstrasse 6", "3086", "Belp")))));
             log.info("Preloading " + userRepository.save(new User("Stefan", "Schneider", adressRepository.save(new Adress("Teststrasse 2", "2500", "Biel")))));
             log.info("Preloading " + userRepository.save(new User("Thomas", "Berger", adressRepository.save(new Adress("Spielstrasse 9", "3054", "Schüpfen")))));
             log.info("Preloading " + userRepository.save(new User("Fritz", "Wirth", adressRepository.save(new Adress("Xyzstrasse 4", "5000", "Basel")))));

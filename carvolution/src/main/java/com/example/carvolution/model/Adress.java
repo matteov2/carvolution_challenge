@@ -5,7 +5,7 @@ import com.sun.istack.NotNull;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "adresses")
+@Table(name = "adress")
 public class Adress {
 
 
@@ -22,7 +22,8 @@ public class Adress {
     @NotNull
     private String city;
 
-    public Adress(){}
+    public Adress() {
+    }
 
     public Adress(String street, String postcode, String city) {
         this.street = street;

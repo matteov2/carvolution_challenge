@@ -5,7 +5,7 @@ import com.sun.istack.NotNull;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User {
 
     @Id
@@ -22,7 +22,8 @@ public class User {
     @ManyToOne(fetch = FetchType.EAGER)
     private Adress adress;
 
-    public User(){}
+    public User() {
+    }
 
     public User(String firstname, String lastname, Adress adress) {
         this.firstname = firstname;
@@ -30,7 +31,7 @@ public class User {
         this.adress = adress;
     }
 
-    public User(int id,String firstname, String lastname, Adress adress) {
+    public User(int id, String firstname, String lastname, Adress adress) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;

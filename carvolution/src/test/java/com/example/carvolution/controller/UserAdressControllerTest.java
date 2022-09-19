@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.mockito.Mockito.when;
+
 import com.example.carvolution.model.Adress;
 import com.example.carvolution.model.User;
 import com.example.carvolution.service.UserAdressService;
@@ -21,7 +22,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-import org.mockito.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,12 +48,11 @@ class UserAdressControllerTest {
     @Test
     public void getAllUsers() throws Exception {
         List<User> users = new ArrayList<>();
-        Adress adress1 = new Adress(1,"street1","postcode1", "city1");
-        User user1 = new User(1, "firstname1","lastname1",adress1);
-        User user2 = new User(2, "firstname2","lastname2",adress1);
+        Adress adress1 = new Adress(1, "street1", "postcode1", "city1");
+        User user1 = new User(1, "firstname1", "lastname1", adress1);
+        User user2 = new User(2, "firstname2", "lastname2", adress1);
         users.add(user1);
         users.add(user2);
-        
 
 
         when(userAdressService.getAllUsers()).thenReturn(users);
@@ -79,47 +78,47 @@ class UserAdressControllerTest {
 
     @Test
     public void getUser() throws Exception {
-        Adress adress1 = new Adress(1,"street1","postcode1", "city1");
-        User user1 = new User(1, "firstname1","lastname1",adress1);
+        Adress adress1 = new Adress(1, "street1", "postcode1", "city1");
+        User user1 = new User(1, "firstname1", "lastname1", adress1);
 
         when(userAdressService.getUser(eq(1))).thenReturn(user1);
 
         mockMvc.perform(get("/carvolution/user/{id}", 1))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType("application/json"))
-            .andExpect(jsonPath("$.id").value(1))
-            .andExpect(jsonPath("$.firstname").value("firstname1"))
-            .andExpect(jsonPath("$.lastname").value("lastname1"))
-            .andExpect(jsonPath("$.adress.id").value(1))
-            .andExpect(jsonPath("$.adress.street").value("street1"))
-            .andExpect(jsonPath("$.adress.postcode").value("postcode1"))
-            .andExpect(jsonPath("$.adress.city").value("city1"));
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(jsonPath("$.id").value(1))
+                .andExpect(jsonPath("$.firstname").value("firstname1"))
+                .andExpect(jsonPath("$.lastname").value("lastname1"))
+                .andExpect(jsonPath("$.adress.id").value(1))
+                .andExpect(jsonPath("$.adress.street").value("street1"))
+                .andExpect(jsonPath("$.adress.postcode").value("postcode1"))
+                .andExpect(jsonPath("$.adress.city").value("city1"));
     }
 
     @Test
-    public void saveUserAndAdress() throws Exception {
-        Adress adress1 = new Adress(1,"street1","postcode1", "city1");
-        User user1 = new User(1, "firstname1","lastname1",adress1);
+    public void saveUser() throws Exception {
+        Adress adress1 = new Adress(1, "street1", "postcode1", "city1");
+        User user1 = new User(1, "firstname1", "lastname1", adress1);
 
-        when(userAdressService.saveUserAndAdress(any())).thenReturn(user1);
+        when(userAdressService.saveUser(any())).thenReturn(user1);
 
         mockMvc.perform(post("/carvolution/user/save")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"lastname\": \"lastname1\"}"))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"lastname\": \"lastname1\"}"))
                 .andExpect(status().isOk());
 
     }
 
     @Test
     public void updateAdress() throws Exception {
-        Adress adress1 = new Adress("street1","postcode1", "city1");
-        User user1 = new User(1, "firstname1","lastname1",adress1);
+        Adress adress1 = new Adress("street1", "postcode1", "city1");
+        User user1 = new User(1, "firstname1", "lastname1", adress1);
 
         when(userAdressService.updateAdress(adress1, 1)).thenReturn(adress1);
 
         mockMvc.perform(put("/carvolution/adress/{id}", 1)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"lastname\": \"lastname1\"}"))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"lastname\": \"lastname1\"}"))
                 .andExpect(status().isOk());
     }
 }
