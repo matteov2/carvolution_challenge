@@ -34,17 +34,16 @@ public class UserAdressService {
         Adress checked = checkAdressForDublicates(adress);
         user.setAdress(checked);
         userRepository.save(user);
-        return userRepository.findById(user.getId())
-                .orElseThrow(() -> new NotFoundException("User with ID " + user.getId() + " not found"));
+        return user;
     }
 
     public Adress updateAdress(Adress adress, int user_id) {
         User user = userRepository.findById(user_id)
                 .orElseThrow(() -> new NotFoundException("User with ID " + user_id + " not found"));
-        Adress checked = checkAdressForDublicates(adress);
-        user.setAdress(checked);
+        Adress checkedAdress = checkAdressForDublicates(adress);
+        user.setAdress(checkedAdress);
         userRepository.save(user);
-        return checked;
+        return checkedAdress;
     }
 
     private Adress checkAdressForDublicates(Adress adress) {

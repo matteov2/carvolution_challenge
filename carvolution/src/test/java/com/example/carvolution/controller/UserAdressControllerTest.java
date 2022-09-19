@@ -102,7 +102,7 @@ class UserAdressControllerTest {
 
         when(userAdressService.saveUser(any())).thenReturn(user1);
 
-        mockMvc.perform(post("/carvolution/user/save")
+        mockMvc.perform(post("/carvolution/user")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"lastname\": \"lastname1\"}"))
                 .andExpect(status().isOk());
