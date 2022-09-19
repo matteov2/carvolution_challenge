@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class DateBaseLoader {
-    private static final Logger log = LoggerFactory.getLogger(DateBaseLoader.class);
+public class DataBaseLoader {
+    private static final Logger log = LoggerFactory.getLogger(DataBaseLoader.class);
 
     @Bean
     CommandLineRunner initDatabase(AdressRepository adressRepository, UserRepository userRepository) {
