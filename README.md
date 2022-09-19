@@ -11,5 +11,5 @@ Local MySQL Database Setup
 REST Endpoints:
 - GET /carvolution/users -> List all Users from the Database
 - GET /carvolution/user/user_id -> List a specific User
-- POST /user/save -> Save a User
+- POST /user -> Save a User
 - PUT /adress/user_id -> Edit/Save Adress of a User
