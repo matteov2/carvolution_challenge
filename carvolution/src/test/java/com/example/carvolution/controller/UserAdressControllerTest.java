@@ -28,7 +28,7 @@ import java.util.List;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = UserAdressController.class)
-class UserAdressControllerTest {
+class UserAdressControllerTest { // TODO: should run against a inmem db
 
     @Autowired
     private MockMvc mockMvc;
@@ -52,7 +52,7 @@ class UserAdressControllerTest {
         User user1 = new User(1, "firstname1", "lastname1", adress1);
         User user2 = new User(2, "firstname2", "lastname2", adress1);
         users.add(user1);
-        users.add(user2);
+        users.add(user2); // TODO: 2 newlines following
 
 
         when(userAdressService.getAllUsers()).thenReturn(users);
@@ -105,7 +105,7 @@ class UserAdressControllerTest {
         mockMvc.perform(post("/carvolution/user")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"lastname\": \"lastname1\"}"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk()); // TODO: useless newline
 
     }
 

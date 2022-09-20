@@ -12,6 +12,7 @@ import java.util.List;
 @Service
 public class UserAdressService {
 
+    // TODO: private final ...
     UserRepository userRepository;
     AdressRepository adressRepository;
 
@@ -47,11 +48,11 @@ public class UserAdressService {
     }
 
     private Adress checkAdressForDublicates(Adress adress) {
-        List<Adress> similarAdresses = adressRepository.findByCityEqualsAndStreetEquals(adress.getCity(), adress.getStreet());
+        List<Adress> similarAdresses = adressRepository.findByCityEqualsAndStreetEquals(adress.getCity(), adress.getStreet()); // TODO: NOOOOO, need an equals
         if (similarAdresses.size() == 0) {
             return adressRepository.save(adress);
         } else {
-            return adressRepository.findById(similarAdresses.get(0).getId())
+            return adressRepository.findById(similarAdresses.get(0).getId()) // TODO: why fetch again from DB ???
                     .orElseThrow(() -> new NotFoundException("Adress with ID" + similarAdresses.get(0).getId() + " not found"));
         }
     }

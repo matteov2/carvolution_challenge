@@ -9,9 +9,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/carvolution")
-public class UserAdressController {
+public class UserAdressController { // TODO: where is the UserController ???
 
-    UserAdressService userAdressService;
+    // TODO: DTOs
+
+    UserAdressService userAdressService; // TODO: should be private final ...
 
     public UserAdressController(UserAdressService userAdressService) {
         this.userAdressService = userAdressService;
@@ -32,7 +34,7 @@ public class UserAdressController {
         return userAdressService.saveUser(user);
     }
 
-    @PutMapping("/adress/{user_id}")
+    @PutMapping("/adress/{user_id}") // TODO: userid should not be used on address endpoint
     private Adress updateAdress(@PathVariable int user_id, @RequestBody Adress adress) {
         return userAdressService.updateAdress(adress, user_id);
     }

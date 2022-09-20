@@ -31,7 +31,7 @@ class UserAdressServiceTest {
     private UserRepository userRepository;
 
     @Mock
-    private AdressRepository adressRepository;
+    private AdressRepository adressRepository; // TODO: unused
 
     @Test
     void getAllUsers() {
@@ -43,12 +43,12 @@ class UserAdressServiceTest {
     }
 
     @Test
-    void getUser() {
+    void getUser() { // TODO: missing exception test, unneccesarry to test stuff from the mock
         Adress adress = new Adress(1, "Musterstrasse 29", "8000", "Bern");
 
         when(userRepository.findById(1)).thenReturn(Optional.of(new User(1, "firstname1", "lastname1", adress)));
 
-        assertEquals(userAdressService.getUser(1).getId(), 1);
+        assertEquals(1, userAdressService.getUser(1).getId()); // TODO: expecte/actual wrong order
         assertEquals(userAdressService.getUser(1).getAdress(), adress);
         assertEquals(userAdressService.getUser(1).getFirstname(), "firstname1");
         assertEquals(userAdressService.getUser(1).getLastname(), "lastname1");
