@@ -17,6 +17,8 @@ public class DataBaseLoader {
     @Bean
     CommandLineRunner initDatabase(AdressRepository adressRepository, UserRepository userRepository) {
 
+        // TODO: DRY
+
         return args -> {
             log.info("Preloading " + userRepository.save(new User("Max", "Muster", adressRepository.save(new Adress("Musterstrasse 29", "3000", "Bern")))));
             log.info("Preloading " + userRepository.save(new User("Hans", "Meier", adressRepository.save(new Adress("Musterstrasse 29", "8000", "Zürich")))));
